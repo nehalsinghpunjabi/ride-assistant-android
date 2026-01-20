@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/failSafeRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@android:color/white">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/failSafeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ride app not installed"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/failSafeSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose an app to install"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Install Uber -->
+    <Button
+        android:id="@+id/installUberBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Install Uber"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Install Ola -->
+    <Button
+        android:id="@+id/installOlaBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Install Ola" />
+
+</LinearLayout>
