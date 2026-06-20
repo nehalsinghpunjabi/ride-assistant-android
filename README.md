@@ -1,25 +1,45 @@
-Voice-first Android app that lets users book Uber or Ola using natural language.
+# Ride Assistant
 
-- Voice command parsing using AI
-- Smart defaults (home/work, ride type)
-- Confirmation screen with fail-safe install UX
-- Works with Uber and Ola deep links
-- Designed for lock-screen and background triggers
+An Android ride-planning assistant. It accepts typed requests, Android speech recognition,
+shared text, and `rideassistant://book` deep links; resolves saved places; previews current
+location on Google Maps; and hands the route to a provider app for final user confirmation.
 
-- Kotlin
-- Android SDK
-- AI backend (Flowise / LLM)
-- Intent-based deep linking
+## Build
 
-🚧 Active development
+Use Android Studio's bundled JDK (17 or newer). From PowerShell:
 
-- Cloud-hosted AI backend
-- Background / lock-screen triggers
-- Play Store release
+```powershell
+$env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
+.\gradlew.bat testDebugUnitTest assembleDebug
+```
 
-1. Clone the repo
-2. Open in Android Studio
-3. Run on emulator or device
-4. Start AI backend server
+Add a restricted Google Maps Android API key to the user-level Gradle properties file
+(`%USERPROFILE%\.gradle\gradle.properties`), never source control:
 
-> AI backend is required for intent parsing.
+```properties
+MAPS_API_KEY=your_restricted_key
+```
+
+Restrict it by Android package `com.example.rideassistant` and the signing certificate SHA-1.
+Enable Maps SDK for Android. A release build must use a production application ID and signing key.
+
+## Assistant/deep-link contract
+
+Examples:
+
+```text
+rideassistant://book?destination=home
+rideassistant://book?pickup=work&destination=Pune%20Airport&type=cab
+```
+
+Static Home, Work, and College launcher shortcuts are included. Rich Google Assistant phrases
+require choosing a currently supported Built-in Intent, Play Console setup, a Digital Asset Links
+domain for verified HTTPS links, and Google review. Those external publication steps cannot be
+completed from this repository alone.
+
+## Provider and estimate boundary
+
+The app never books automatically. Uber, Ola, and Rapido are opened only after the user chooses
+an option. Their consumer apps and deep-link support can vary by installed version. If a provider
+link is unavailable, Ride Assistant opens a Google Maps route preview. Displayed fare/ETA ranges
+are explicitly illustrative; live comparison requires approved commercial provider APIs.

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut android:shortcutId="ride_home" android:enabled="true"
+        android:icon="@mipmap/ic_launcher" android:shortcutShortLabel="@string/shortcut_ride_home"
+        android:shortcutLongLabel="@string/shortcut_ride_home_long">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.example.rideassistant"
+            android:targetClass="com.example.rideassistant.MainActivity" android:data="rideassistant://book?destination=home" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut android:shortcutId="ride_work" android:enabled="true"
+        android:icon="@mipmap/ic_launcher" android:shortcutShortLabel="@string/shortcut_ride_work"
+        android:shortcutLongLabel="@string/shortcut_ride_work_long">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.example.rideassistant"
+            android:targetClass="com.example.rideassistant.MainActivity" android:data="rideassistant://book?destination=work" />
+    </shortcut>
+    <shortcut android:shortcutId="ride_college" android:enabled="true"
+        android:icon="@mipmap/ic_launcher" android:shortcutShortLabel="@string/shortcut_ride_college"
+        android:shortcutLongLabel="@string/shortcut_ride_college_long">
+        <intent android:action="android.intent.action.VIEW" android:targetPackage="com.example.rideassistant"
+            android:targetClass="com.example.rideassistant.MainActivity" android:data="rideassistant://book?destination=college" />
+    </shortcut>
+</shortcuts>
