@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <!-- 🔹 Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <queries>
+        <package android:name="com.google.android.googlequicksearchbox" />
+        <package android:name="com.ubercab" />
+        <package android:name="com.olacabs.customer" />
+        <package android:name="com.rapido.passenger" />
+        <intent><action android:name="android.speech.RecognitionService" /></intent>
+    </queries>
 
     <application
+        android:name=".RideAssistantApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,9 +33,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RideAssistant"
         tools:targetApi="31">
-        <activity
-            android:name=".RideService"
-            android:exported="false" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
         <!-- 🚀 MAIN APP ENTRY -->
         <activity
             android:name=".MainActivity"
@@ -29,43 +46,54 @@
             <!-- Launcher -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="rideassistant" android:host="book" />
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
 
             <!-- Voice + Text input -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.VOICE_COMMAND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
-        </activity> <!-- ✅ CONFIRM SCREEN -->
+        </activity>
+
+        <!-- ✅ CONFIRM SCREEN -->
         <activity
             android:name=".ConfirmActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 🛡️ FAIL-SAFE INSTALL SCREEN -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- 🛡️ FAIL-SAFE INSTALL SCREEN -->
         <activity
             android:name=".FailSafeActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> <!-- 📡 BACKGROUND TRIGGER RECEIVER (LOCK-SCREEN SAFE) -->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- 📡 BACKGROUND / LOCK-SCREEN TRIGGER -->
         <receiver
             android:name=".RideTriggerReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
-        </receiver> <!-- ⚙️ FOREGROUND SERVICE (OPENS RIDE APP FROM BACKGROUND) -->
+        </receiver>
+
+        <!-- ⚙️ FOREGROUND SERVICE -->
         <service
             android:name=".RideService"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
+
     </application>
 
 </manifest>

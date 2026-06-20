@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Ride Assistant</string>
+    <string name="ready">Say or type where you want to go</string>
+    <string name="listening">Starting microphone…</string>
+    <string name="speak_now">Speak now</string>
+    <string name="processing">Understanding your request…</string>
+    <string name="locating">Finding your location…</string>
+    <string name="review_ride">Review your route and choose a provider</string>
+    <string name="voice_prompt">Where would you like to go?</string>
+    <string name="route_summary">From: %1$s\nTo: %2$s\nRide: %3$s</string>
+    <string name="provider_option">%1$s  •  %2$s  •  %3$s</string>
+    <string name="shortcut_ride_home">Ride home</string>
+    <string name="shortcut_ride_home_long">Book a ride home</string>
+    <string name="shortcut_ride_work">Ride to work</string>
+    <string name="shortcut_ride_work_long">Book a ride to work</string>
+    <string name="shortcut_ride_college">Ride to college</string>
+    <string name="shortcut_ride_college_long">Book a ride to college</string>
 </resources>

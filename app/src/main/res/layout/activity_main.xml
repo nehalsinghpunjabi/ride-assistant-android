@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/statusText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Listening for ride request…"
-        android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ride Assistant" android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium" />
+        <TextView android:id="@+id/statusText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/ready" />
+        <ProgressBar android:id="@+id/voiceLevel" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="8dp" android:layout_marginTop="12dp" android:max="100" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:orientation="horizontal">
+            <EditText android:id="@+id/rideInput" android:layout_width="0dp" android:layout_height="56dp" android:layout_weight="1" android:hint="Ride from home to Pune Airport" android:imeOptions="actionGo" android:inputType="textCapSentences" />
+            <Button android:id="@+id/voiceButton" android:layout_width="wrap_content" android:layout_height="56dp" android:text="🎙" android:contentDescription="Speak ride request" />
+        </LinearLayout>
+        <Button android:id="@+id/searchButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Plan ride" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <Button android:id="@+id/homeButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Home" />
+            <Button android:id="@+id/workButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Work" />
+            <Button android:id="@+id/collegeButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="College" />
+        </LinearLayout>
+        <fragment android:id="@+id/map" android:name="com.google.android.gms.maps.SupportMapFragment" android:layout_width="match_parent" android:layout_height="220dp" android:layout_marginTop="16dp" />
+        <TextView android:id="@+id/rideSummary" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:padding="12dp" android:visibility="gone" />
+        <LinearLayout android:id="@+id/providerOptions" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+        <TextView android:id="@+id/estimateDisclaimer" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="8dp" android:text="Fare and ETA are illustrative estimates, not live provider quotes. Confirm the final price in the provider app." android:textSize="12sp" android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>
