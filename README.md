@@ -4,6 +4,16 @@ An Android ride-planning assistant. It accepts typed requests, Android speech re
 shared text, and `rideassistant://book` deep links; resolves saved places; previews current
 location on Google Maps; and hands the route to a provider app for final user confirmation.
 
+> A voice-first Android assistant that turns an everyday request—"book a cab to Pune Airport"—into a transparent, user-confirmed trip handoff.
+
+**Highlights:** Kotlin · Jetpack Compose · Android speech recognition · Google Maps · deep links · provider-aware routing
+
+## What it demonstrates
+
+- Multiple entry points: typed requests, voice, shared text, launcher shortcuts and deep links.
+- Deliberate user-consent boundaries: the app prepares a ride and opens a provider; it never books on a user's behalf.
+- Secure integration guidance: Maps credentials stay outside source control and are restricted to the Android package and signing certificate.
+
 ## Build
 
 Use Android Studio's bundled JDK (17 or newer). From PowerShell:
